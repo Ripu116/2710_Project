@@ -1,0 +1,24 @@
+{% extends 'store/main.html' %}
+{% load static %}
+
+{% block content %}
+    <div class="row">
+        {% for product in products %}
+        <div class="col-lg-4">
+            <img class="thumbnail" src="{{product.imageURL}}">
+            <div class="box-element product">
+                <h6 class="iitms"><strong>{{product.name}} ({{product.category}}, @Store {{product.store.id}})</strong></h6>
+                <hr>
+                {% if product.stock > 0 %}
+                    <button data-product="{{product.id}}" data-action="add" class="btn btn-outline-success add-btn update-cart">Add Item</button>
+                {% else %}
+                    <button data-product="{{product.id}}" data-action="add" class="btn btn-outline-success add-btn update-cart" disabled>Out of stock</button>
+                {% endif %}
+                <!-- <a class="btn btn-outline-success" href="#">View</a> -->
+                <h4 style="display: inline-block; color: white; font-size: 13px; margin-left:130px;background-color: #28a745; border-radius:10px; padding:8px; "> Rs. {{product.price|floatformat:1}} </h4>
+                
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+{% endblock content %}
